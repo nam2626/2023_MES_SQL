@@ -32,6 +32,40 @@ CREATE TABLE STUDENT(
 	STD_SCORE NUMBER(3,2)
 );
 
+--데이터 조회
+--SELECT  조회할 컬럼명, 조회할 컬럼명....
+--FROM 조회할 테이블명
+--WHERE 조건식
+
+--PERSON 테이블에 있는 내용을 전체 조회
+SELECT PNAME, AGE FROM PERSON;
+SELECT * FROM PERSON;
+
+--PERSON 테이블에서 나이가 30이상인 사람만 조회
+SELECT * FROM PERSON WHERE AGE >= 30;
+--PERSON 테이블에서 나이가 20대인 사람만 조회 
+SELECT * FROM PERSON WHERE AGE >= 20 AND AGE < 30;
+SELECT * FROM PERSON WHERE AGE BETWEEN 20 AND 29;
+
+--MEMBER 테이블에서 40대인 사람만 조회, 아이디, 이름, 나이, 성별만 출력
+SELECT MEMBER_ID, MEMBER_NAME, MEMBER_AGE, MEMBER_GENDER
+FROM MEMBER 
+WHERE MEMBER_AGE BETWEEN 40 AND 49;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
