@@ -57,11 +57,30 @@ SELECT * FROM HUMAN WHERE PNAME LIKE '신%';
 SELECT * FROM HUMAN 
 WHERE PNAME LIKE '%훈%' OR AGE BETWEEN 30 AND 39;
 --이름이 4글자 이면서 마지막 글자가 '은'으로 끝나는 사람을 조회
+-- 한글자 와일드 카드 문자가 _ 이다
+SELECT * FROM HUMAN 
+WHERE PNAME LIKE '___은';
 
+--MEMBER 테이블에서 나이가 50세 이상이면서 성별 남자인 사람만 조회
+SELECT * FROM MEMBER 
+WHERE MEMBER_AGE >= 50 AND MEMBER_GENDER <> 'F';
 
+--MEMBER 테이블에서 나이가 많은 순으로 조회, 여자만 조회
+SELECT * FROM MEMBER
+WHERE MEMBER_GENDER = 'F'
+ORDER BY MEMBER_AGE DESC;
 
+--수정
+--회원 테이블에서 나이가 50이상인 회원들의 비밀번호를 123456으로 수정
+UPDATE MEMBER
+SET MEMBER_PASSWD = '123456'
+WHERE MEMBER_AGE >= 50;
 
+--회원 테이블에서 모든 회원의 나이를 2씩 감소, 나이는 음수 및 0이 나올수 없다.
+UPDATE MEMBER SET MEMBER_AGE = MEMBER_AGE - 2
+WHERE MEMBER_AGE - 2 > 0;
 
+--학생 테이블에서 평점이 1미만 학생들의 점수를 0.5씩 올려서 수정
 
 
 
