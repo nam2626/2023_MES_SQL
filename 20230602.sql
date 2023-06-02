@@ -37,9 +37,26 @@ CREATE TABLE EMPLOYEE(
 INSERT INTO EMPLOYEE 
 VALUES('AAA1','홍길동','사원','회계부','2022/03/01',3200);
 
+--다중 INSERT문
+--학생 테이블에 데이터 3건을 추가
+insert all
+    into student(std_no,std_name,std_major,std_score) 
+    values('20221116','홍길동','정치외교학과',3.31)
+    into student(std_no,std_name,std_major,std_score)
+    values('20221117','김길동','경제학과',3.21)
+    into student(std_no,std_name,std_major,std_score)
+    values('20221118','박길동','경영학과',3.11)
+select * from dual;
+--조회
+--HUMAN 테이블에서 나이가 20 이상인 사람을 조회
+SELECT * FROM HUMAN WHERE AGE >= 20;
+--HUMAN 테이블에서 성이 신씨인 사람만 조회
+SELECT * FROM HUMAN WHERE PNAME LIKE '신%';
 
-
-
+--HUMAN 테이블에서 30대이거나 이름에 '훈'이 들어가는 사람만 조회 
+SELECT * FROM HUMAN 
+WHERE PNAME LIKE '%훈%' OR AGE BETWEEN 30 AND 39;
+--이름이 4글자 이면서 마지막 글자가 '은'으로 끝나는 사람을 조회
 
 
 
