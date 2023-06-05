@@ -51,6 +51,15 @@ CREATE TABLE DRUG_SELL(
 	DRUG_PRICE NUMBER
 );
 
+--제약사만 조회, 중복된 내용을 제외하고 조회
+--DISTINCT 중복된 내용을 제외하는 키워드
+SELECT DISTINCT DRUG_MAKER FROM DRUG_SELL;
+--제약사별 판매 개수 평균을 조회
+SELECT DRUG_MAKER, FLOOR(AVG(SELL_EA))
+FROM DRUG_SELL
+GROUP BY DRUG_MAKER;
+--제약사별 판매하는 약품 개수를 조회
+
 
 
 
