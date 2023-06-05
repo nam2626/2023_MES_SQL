@@ -79,6 +79,57 @@ SELECT TO_CHAR(SELL_DATE,'YYYY/MM'), SUM(SELL_EA), CEIL(AVG(SELL_EA))
 FROM DRUG_SELL
 GROUP BY TO_CHAR(SELL_DATE,'YYYY/MM');
 --요일별, 약품별 판매 개수 총합을 조회
+SELECT TO_CHAR(SELL_DATE,'DY'),DRUG_NAME, SUM(SELL_EA)
+FROM DRUG_SELL 
+GROUP BY TO_CHAR(SELL_DATE,'DY'),DRUG_NAME;
+--제약사, 월별 판매 개수 총합을 조회, 단 판매개수가 건당 30이상인 데이터만 대상으로 잡음
+SELECT DRUG_MAKER, TO_CHAR(SELL_DATE,'MM'), SUM(SELL_EA) 
+FROM DRUG_SELL
+WHERE SELL_EA >= 30
+GROUP BY DRUG_MAKER, TO_CHAR(SELL_DATE,'MM');
+-----------------------------------------------------------------
+----조인(Join)
+-----------------------------------------------------------------
+CREATE TABLE TABLE_A(
+	CODE CHAR(1),
+	NUM NUMBER(1)
+);
+CREATE TABLE TABLE_B(
+	CODE CHAR(1),
+	VAL CHAR(1)
+);
+
+insert into table_a values('A',1);
+insert into table_a values('B',2);
+insert into table_a values('C',3);
+insert into table_a values('F',5);
+
+insert into table_b values('A','+');
+insert into table_b values('B','-');
+insert into table_b values('C','*');
+insert into table_b values('D','$');
+insert into table_b values('E','#');
+
+--동일 조인
+SELECT A.CODE, A.NUM, B.VAL
+FROM TABLE_A A, TABLE_B B
+WHERE A.CODE = B.CODE;
+
+--자연 조인
+SELECT * FROM TABLE_A NATURAL JOIN TABLE_B;
+
+--교차 조인
+SELECT * FROM TABLE_A CROSS JOIN TABLE_B;
+
+--외부 조인
+--LEFT JOIN
+SELECT A.*, B.*
+FROM TABLE_A A, TABLE_B B
+WHERE A.CODE = B.CODE(+);
+--RIGHT JOIN
+SELECT A.*, B.*
+FROM TABLE_A A, TABLE_B B
+WHERE A.CODE(+) = B.CODE;
 
 
 
