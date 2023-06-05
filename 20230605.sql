@@ -131,6 +131,25 @@ SELECT A.*, B.*
 FROM TABLE_A A, TABLE_B B
 WHERE A.CODE(+) = B.CODE;
 
+--불일치 쿼리
+--두 테이블간 조인으로 조회시 일치하지 않는 데이터를 조회하는 것을 불일치 쿼리
+SELECT A.*, B.*
+FROM TABLE_A A, TABLE_B B
+WHERE A.CODE = B.CODE(+) AND B.CODE IS NULL;
+
+SELECT A.*, B.*
+FROM TABLE_A A, TABLE_B B
+WHERE A.CODE(+) = B.CODE AND A.CODE IS NULL;
+
+--학생 테이블을 이용해서 조인을 연습
+--학과 테이블 작성
+--학과명을 학생 테이블에서 저장된 데이터를 가져와서 생성
+--1. 학생 테이블에서 학과명만 조회, 단 학과명은 중복된 데이터를 제거
+SELECT DISTINCT STD_MAJOR FROM STUDENT;
+--2. 1번 작업 결과에서 행번호를 붙여서 조회
+SELECT ROWNUM, STD_MAJOR FROM (SELECT DISTINCT STD_MAJOR FROM STUDENT);
+
+
 
 
 
