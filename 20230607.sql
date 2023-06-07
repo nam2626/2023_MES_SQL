@@ -33,9 +33,29 @@ AND SS.MONEY IS NULL;
 
 --학과명, 평점의 평균(소수 2자리)
 --단, 학과번호가 일치하지 않는 학과명은 학과코드 오류로 조회
-SELECT NVL(M.MAJOR_NAME,'학과코드 오류'), S.STD_SCORE
+SELECT NVL(M.MAJOR_NAME,'학과코드 오류'), TRUNC(AVG(S.STD_SCORE),2)
 FROM STUDENT S, MAJOR M
-WHERE S.MAJOR_NO = M.MAJOR_NO(+);
-GROUP BY 
+WHERE S.MAJOR_NO = M.MAJOR_NO(+)
+GROUP BY NVL(M.MAJOR_NAME,'학과코드 오류'); 
+
+--장학금을 받는 학생들을 기준으로 학과별 인원수를 조회
+--학과명, 인원수 --> 학과 번호가 일치하지 않는 학과명은 '학과코드 오류'로 대체
+SELECT NVL(M.MAJOR_NAME,'학과코드 오류'), COUNT(*)
+FROM STUDENT s , MAJOR m , STUDENT_SCHOLARSHIP ss 
+WHERE S.STD_NO = SS.STD_NO AND S.MAJOR_NO = M.MAJOR_NO(+)
+GROUP BY NVL(M.MAJOR_NAME,'학과코드 오류')
+ORDER BY COUNT(*) DESC;
+
+--학과별 제적 대상자를 인원수를 조회
+--점수가 1.5 미만인 대상자들이 제적 대상자
+--단, 학과번호가 일치하지 않는 학과명은 학과코드 오류로 조회
+--학과명, 제적대상자 인원수, 정렬은 제적대상자 인원수가 높은 순서대로 조회
+SELECT NVL(M.MAJOR_NAME,'학과코드 오류'), COUNT(*)
+FROM STUDENT S, MAJOR M
+WHERE S.MAJOR_NO = M.MAJOR_NO(+) AND S.STD_SCORE < 1.5
+GROUP BY NVL(M.MAJOR_NAME,'학과코드 오류')
+ORDER BY COUNT(*) DESC;
+
+
 
 
