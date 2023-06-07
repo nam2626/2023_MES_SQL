@@ -120,11 +120,71 @@ WHERE S.MAJOR_NO = M.MAJOR_NO(+)
 AND S.STD_NO NOT IN(SELECT SS.STD_NO FROM STUDENT_SCHOLARSHIP SS)
 GROUP BY M.MAJOR_NAME;
 
+--ROWNUM 행번호 찍어주는 명령어
+--학생 정보 조회시 평점 기준으로 내림차순 정렬해서 조회
+--조회가 끝난 상태에서 정렬을 수행하기 때문에 행번호가 미리찍혀있어서 같이 정렬됨
+SELECT ROWNUM, S.* FROM STUDENT S
+ORDER BY S.STD_SCORE DESC;
+
+SELECT ROWNUM, S.* FROM
+(SELECT * FROM STUDENT ORDER BY STD_SCORE DESC) S;
+
+----------------------------------------------------------
+
+CREATE TABLE car (
+    car_no       CHAR(8 BYTE) NOT NULL,
+    car_name     VARCHAR2(150 BYTE),
+    car_maker_no NUMBER(10) NOT NULL,
+    car_price    NUMBER(4)
+);
+
+ALTER TABLE car ADD CONSTRAINT car_pk PRIMARY KEY ( car_no );
+
+CREATE TABLE car_maker (
+    car_maker_no   NUMBER(10) NOT NULL,
+    car_maker_name VARCHAR2(150 BYTE)
+);
+
+ALTER TABLE car_maker ADD CONSTRAINT car_maker_pk PRIMARY KEY ( car_maker_no );
+
+CREATE TABLE car_sell (
+    car_sell_no    NUMBER NOT NULL,
+    car_no         CHAR(8 BYTE) NOT NULL,
+    car_sell_date  DATE,
+    car_sell_ea    NUMBER(3),
+    car_sell_price NUMBER
+);
+
+ALTER TABLE car_sell ADD CONSTRAINT car_sell_pk PRIMARY KEY ( car_sell_no );
+
+ALTER TABLE car
+    ADD CONSTRAINT car_car_maker_fk FOREIGN KEY ( car_maker_no )
+        REFERENCES car_maker ( car_maker_no );
+
+ALTER TABLE car_sell
+    ADD CONSTRAINT car_sell_car_fk FOREIGN KEY ( car_no )
+        REFERENCES car ( car_no )
+            ON DELETE CASCADE;
+
+--자동차 정보를 조회 (car, car_maker)
+--car_no, car_name, maker_name, price
 
 
+--제조사별, 차량 종류 개수, 평균 판매가를 조회
+--maker_name, 개수, 판매가 평균
 
 
+--최대 판매가를 가진 차량의 정보를 조회
+--car_id, car_name, maker_name, price
+
+           
+--최대 판매가와 최소 판매가를 가진 차량의 정보를 조회
+--car_id, car_name, maker_name, price           
 
 
+--차량 판매 정보 중 평균 판매대수 이상인 차량 정보를 출력
+--car_id, car_name, maker_name, sale_count(판매대수)
 
+
+--월별 최다 판매 차량 대수를 조회
 
