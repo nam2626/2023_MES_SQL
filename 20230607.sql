@@ -55,7 +55,20 @@ FROM STUDENT S, MAJOR M
 WHERE S.MAJOR_NO = M.MAJOR_NO(+) AND S.STD_SCORE < 1.5
 GROUP BY NVL(M.MAJOR_NAME,'학과코드 오류')
 ORDER BY COUNT(*) DESC;
+----------------------------------------------------------
+-----서브 쿼리
+----------------------------------------------------------
+--학생 정보 조회
+--학번 이름 학과명 평점
+SELECT S.STD_NO, S.STD_NAME, S.STD_SCORE, 
+(SELECT M.MAJOR_NAME FROM MAJOR M WHERE S.MAJOR_NO = M.MAJOR_NO)
+FROM STUDENT S;
 
+--학생정보 출력시 학과번호가 일치하지 않는 학생을 조회
+SELECT * FROM STUDENT S
+WHERE S.MAJOR_NO IN(SELECT M.MAJOR_NO FROM MAJOR M);
 
+SELECT * FROM STUDENT S
+WHERE S.MAJOR_NO NOT IN(SELECT M.MAJOR_NO FROM MAJOR M);
 
 
