@@ -83,9 +83,32 @@ SELECT S.STD_NO, S.STD_NAME, S.STD_SCORE, M.MAJOR_NAME
 FROM STUDENT S, MAJOR M
 WHERE S.MAJOR_NO = M.MAJOR_NO(+) AND M.MAJOR_NAME LIKE '%공학%'; 
 
+SELECT * 
+FROM (
+ SELECT S.STD_NO, S.STD_NAME, M.MAJOR_NAME, S.STD_SCORE 
+ FROM STUDENT S, MAJOR M
+ WHERE S.MAJOR_NO = M.MAJOR_NO(+)
+)
+WHERE MAJOR_NAME LIKE '%공학%';
 
+--학생 테이블에 있는 모든 학생 정보를 조회
+--단 전체 평점의 평균 이하인 학생들을 조회
+SELECT * FROM STUDENT
+WHERE STD_SCORE <= (SELECT AVG(STD_SCORE) FROM STUDENT);
 
+--위에 결과를 LOW_STUDENT라는 테이블로 생성해서 데이터를 저장
+CREATE TABLE LOW_STUDENT
+AS
+SELECT * FROM STUDENT
+WHERE STD_SCORE <= (SELECT AVG(STD_SCORE) FROM STUDENT);
 
+--장학금을 받는 학생들을 조회 (서브쿼리 이용해서 조회)
+
+--학생들중 장학금을 못받는 학생들의 정보를 조회
+--학번 이름 학과명 평점 조회
+
+--학생들중 장학금을 못받는 학생들의 정보를 조회
+--학과별 인원수를 출력 --> 학과명, 인원수
 
 
 
