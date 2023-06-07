@@ -18,6 +18,9 @@ SELECT S.STD_NO, S.STD_NAME, S.STD_SCORE,
 FROM STUDENT S , MAJOR M 
 WHERE S.MAJOR_NO = M.MAJOR_NO(+) AND M.MAJOR_NO IS NULL;
 
+--학생들중 장학금을 받는 학생들의 정보를 조회
+--학번 이름 평점 학과명 장학금 금액
+
 
   
 
