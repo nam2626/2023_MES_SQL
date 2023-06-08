@@ -1,0 +1,27 @@
+--인덱스 생성 예제
+CREATE INDEX CAR_SELL_IDX
+ON CAR_SELL(CAR_NO);
+
+--인덱스 삭제
+DROP INDEX CAR_SELL_IDX;
+
+--인덱스 리빌딩
+ALTER INDEX CAR_SELL_IDX REBUILD;
+
+--사용자가 만든 개체 조회
+SELECT * FROM USER_OBJECTS;
+--사용자가 만든 테이블
+SELECT * FROM USER_TABLES;
+--사용자가 만든 인덱스
+SELECT * FROM USER_INDEXES;
+--사용자가 만든 제약조건
+SELECT * FROM USER_CONSTRAINTS;
+
+
+
+
+
+
+
+
+
