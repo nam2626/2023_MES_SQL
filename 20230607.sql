@@ -168,10 +168,17 @@ ALTER TABLE car_sell
 
 --자동차 정보를 조회 (car, car_maker)
 --car_no, car_name, maker_name, price
+SELECT C.CAR_NO, C.CAR_NAME, C.CAR_PRICE, CM.CAR_MAKER_NAME 
+FROM CAR C, CAR_MAKER CM
+WHERE C.CAR_MAKER_NO = CM.CAR_MAKER_NO;
 
+SELECT C.CAR_NO, C.CAR_NAME, C.CAR_PRICE, 
+(SELECT CM.CAR_MAKER_NAME FROM CAR_MAKER CM 
+WHERE C.CAR_MAKER_NO = CM.CAR_MAKER_NO) AS CAR_MAKER_NAME
+FROM CAR C;
 
---제조사별, 차량 종류 개수, 평균 판매가를 조회
---maker_name, 개수, 판매가 평균
+--제조사별, 차량 종류 개수, 평균 정가를 조회
+--maker_name, 개수, 정가 평균
 
 
 --최대 판매가를 가진 차량의 정보를 조회
