@@ -252,6 +252,28 @@ END TOTAL_NUM;
 
 SELECT TOTAL_NUM(100) FROM DUAL;
 
+--------------------------------------------
+---트리거
+--------------------------------------------
+CREATE TABLE DATA_LOG(
+	LOG_DATE DATE DEFAULT SYSDATE,
+	LOG_DETAIL VARCHAR2(1000)	
+);
+
+CREATE OR REPLACE TRIGGER UPDATE_MAJOR
+BEFORE 
+DELETE OR INSERT OR UPDATE
+OF MAJOR_NO, MAJOR_NAME ON MAJOR
+FOR EACH ROW 
+BEGIN 
+	
+END;
+
+
+
+
+
+
 
 
 
